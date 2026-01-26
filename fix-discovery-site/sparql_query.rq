@@ -1,0 +1,8 @@
+SELECT ?item ?itemLabel (COUNT(?site) AS ?siteCount) WHERE {
+  ?item wdt:P65 ?site .
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+}
+GROUP BY ?item ?itemLabel
+HAVING (COUNT(?site) > 1)
+ORDER BY DESC(?siteCount)
+LIMIT 200

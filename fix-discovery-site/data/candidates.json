@@ -1,0 +1,394 @@
+{
+    "metadata": {
+        "description": "P65 single-value constraint violations",
+        "created": "2026-01-21",
+        "count": 15
+    },
+    "candidates": [
+        {
+            "item_q": "Q17393843",
+            "item_label": "(12476) 1997 EU2",
+            "item_description": "asteroid",
+            "sites": [
+                {
+                    "site_q": "Q17",
+                    "site_label": "Japan",
+                    "site_numberic_id": 17,
+                    "statement_guid": "Q17393843$b8e75211-402f-f281-aab6-6c93184c6712",
+                    "has_reference": false,
+                    "current_rank": "normal"
+                },
+                {
+                    "site_q": "Q1610198",
+                    "site_label": "\u014cizumi Observatory",
+                    "site_numberic_id": 1610198,
+                    "statement_guid": "Q17393843$1008a443-31e6-44b4-94d3-21fc7497a995",
+                    "has_reference": true,
+                    "current_rank": "normal"
+                }
+            ]
+        },
+        {
+            "item_q": "Q151011",
+            "item_label": "32 Pomona",
+            "item_description": "main-belt asteroid",
+            "sites": [
+                {
+                    "site_q": "Q90",
+                    "site_label": "Paris",
+                    "site_numberic_id": 90,
+                    "statement_guid": "Q151011$0CF26E6A-48DA-4175-B9D9-5CB303D9A4AD",
+                    "has_reference": true,
+                    "current_rank": "normal"
+                },
+                {
+                    "site_q": "Q461340",
+                    "site_label": "Paris Observatory, PSL University",
+                    "site_numberic_id": 461340,
+                    "statement_guid": "Q151011$bd2e6de5-cd89-448c-bc20-c24de9b528ef",
+                    "has_reference": true,
+                    "current_rank": "normal"
+                }
+            ]
+        },
+        {
+            "item_q": "Q152446",
+            "item_label": "40 Harmonia",
+            "item_description": "main-belt asteroid",
+            "sites": [
+                {
+                    "site_q": "Q90",
+                    "site_label": "Paris",
+                    "site_numberic_id": 90,
+                    "statement_guid": "Q152446$598655AA-2C55-451A-99D4-E99A022C0A65",
+                    "has_reference": true,
+                    "current_rank": "normal"
+                },
+                {
+                    "site_q": "Q461340",
+                    "site_label": "Paris Observatory, PSL University",
+                    "site_numberic_id": 461340,
+                    "statement_guid": "Q152446$6d02fffd-4d95-4838-b67a-648bdbacf84d",
+                    "has_reference": true,
+                    "current_rank": "normal"
+                }
+            ]
+        },
+        {
+            "item_q": "Q154672",
+            "item_label": "48 Doris",
+            "item_description": "main-belt asteroid",
+            "sites": [
+                {
+                    "site_q": "Q90",
+                    "site_label": "Paris",
+                    "site_numberic_id": 90,
+                    "statement_guid": "Q154672$534F5910-3098-46EF-85B3-044EA2351C44",
+                    "has_reference": true,
+                    "current_rank": "normal"
+                },
+                {
+                    "site_q": "Q461340",
+                    "site_label": "Paris Observatory, PSL University",
+                    "site_numberic_id": 461340,
+                    "statement_guid": "Q154672$b2f5d216-c429-447d-8f0d-1aad49d2e926",
+                    "has_reference": true,
+                    "current_rank": "normal"
+                }
+            ]
+        },
+        {
+            "item_q": "Q155100",
+            "item_label": "52 Europa",
+            "item_description": "main-belt asteroid",
+            "sites": [
+                {
+                    "site_q": "Q90",
+                    "site_label": "Paris",
+                    "site_numberic_id": 90,
+                    "statement_guid": "Q155100$6C7C813E-149C-4D71-9BE3-957873F435B3",
+                    "has_reference": true,
+                    "current_rank": "normal"
+                },
+                {
+                    "site_q": "Q461340",
+                    "site_label": "Paris Observatory, PSL University",
+                    "site_numberic_id": 461340,
+                    "statement_guid": "Q155100$ebf1e511-998b-4bc9-82ea-3fc750d614fa",
+                    "has_reference": true,
+                    "current_rank": "normal"
+                }
+            ]
+        },
+        {
+            "item_q": "Q155100",
+            "item_label": "52 Europa",
+            "item_description": "main-belt asteroid",
+            "sites": [
+                {
+                    "site_q": "Q90",
+                    "site_label": "Paris",
+                    "site_numberic_id": 90,
+                    "statement_guid": "Q155100$6C7C813E-149C-4D71-9BE3-957873F435B3",
+                    "has_reference": true,
+                    "current_rank": "normal"
+                },
+                {
+                    "site_q": "Q461340",
+                    "site_label": "Paris Observatory, PSL University",
+                    "site_numberic_id": 461340,
+                    "statement_guid": "Q155100$ebf1e511-998b-4bc9-82ea-3fc750d614fa",
+                    "has_reference": true,
+                    "current_rank": "normal"
+                }
+            ]
+        },
+        {
+            "item_q": "Q19611648",
+            "item_label": "(10987) 1967 US",
+            "item_description": "minor planet",
+            "sites": [
+                {
+                    "site_q": "Q1637",
+                    "site_label": "Bergedorf",
+                    "site_numberic_id": 1637,
+                    "statement_guid": "Q19611648$15B7C35D-1923-443F-BB56-FF4A253EFE3F",
+                    "has_reference": true,
+                    "current_rank": "normal"
+                },
+                {
+                    "site_q": "Q681942",
+                    "site_label": "Hamburg-Bergedorf Observatory",
+                    "site_numberic_id": 681942,
+                    "statement_guid": "Q19611648$21917f19-21ce-48c8-9cb2-cf617ecdc232",
+                    "has_reference": true,
+                    "current_rank": "normal"
+                }
+            ]
+        },
+        {
+            "item_q": "Q19624711",
+            "item_label": "(11783) 1971 UN1",
+            "item_description": "asteroid",
+            "sites": [
+                {
+                    "site_q": "Q1637",
+                    "site_label": "Bergedorf",
+                    "site_numberic_id": 1637,
+                    "statement_guid": "Q19624711$4C755B68-7776-4833-8D26-182C19AE4A2A",
+                    "has_reference": true,
+                    "current_rank": "normal"
+                },
+                {
+                    "site_q": "Q681942",
+                    "site_label": "Hamburg-Bergedorf Observatory",
+                    "site_numberic_id": 681942,
+                    "statement_guid": "Q19624711$6fa26498-669b-48d6-b425-15ab530629f3",
+                    "has_reference": true,
+                    "current_rank": "normal"
+                }
+            ]
+        },
+        {
+            "item_q": "Q19624712",
+            "item_label": "(11784) 1971 UT1",
+            "item_description": "asteroid",
+            "sites": [
+                {
+                    "site_q": "Q1637",
+                    "site_label": "Bergedorf",
+                    "site_numberic_id": 1637,
+                    "statement_guid": "Q19624712$26A4B288-D207-43F0-8C5F-DD1021531173",
+                    "has_reference": true,
+                    "current_rank": "normal"
+                },
+                {
+                    "site_q": "Q681942",
+                    "site_label": "Hamburg-Bergedorf Observatory",
+                    "site_numberic_id": 681942,
+                    "statement_guid": "Q19624712$a1b1c9d3-27cb-401d-86a8-13cc4daf1282",
+                    "has_reference": true,
+                    "current_rank": "normal"
+                }
+            ]
+        },
+        {
+            "item_q": "Q3514986",
+            "item_label": "80P\/Peters\u2013Hartley",
+            "item_description": "comet",
+            "sites": [
+                {
+                    "site_q": "Q2034636",
+                    "site_label": "Astronomical Observatory of Capodimonte",
+                    "site_numberic_id": 2034636,
+                    "statement_guid": "Q3514986$6815186a-4a69-bd77-dddb-ce81800126b2",
+                    "has_reference": false,
+                    "current_rank": "normal"
+                },
+                {
+                    "site_q": "Q2634",
+                    "site_label": "Naples",
+                    "site_numberic_id": 2634,
+                    "statement_guid": "Q3514986$bd6c77fa-4d5d-d1f1-c468-f5e1b0e2cbc8",
+                    "has_reference": false,
+                    "current_rank": "normal"
+                }
+            ]
+        },
+        {
+            "item_q": "Q30278766",
+            "item_label": "431397 Carolinregina",
+            "item_description": "asteroid",
+            "sites": [
+                {
+                    "site_q": "Q2966",
+                    "site_label": "Heidelberg",
+                    "site_numberic_id": 2966,
+                    "statement_guid": "Q30278766$021AD23C-2BED-4ADB-8F15-75813CFBC99E",
+                    "has_reference": true,
+                    "current_rank": "normal"
+                },
+                {
+                    "site_q": "Q27115",
+                    "site_label": "Heidelberg-K\u00f6nigstuhl State Observatory",
+                    "site_numberic_id": 27115,
+                    "statement_guid": "Q30278766$666680d4-cb2e-4976-90fe-be3d60ee2478",
+                    "has_reference": true,
+                    "current_rank": "normal"
+                }
+            ]
+        },
+        {
+            "item_q": "Q2378306",
+            "item_label": "GRB 970508",
+            "item_description": "gamma-ray burst detected on May 8, 1997",
+            "sites": [
+                {
+                    "site_q": "Q23770",
+                    "site_label": "BeppoSAX",
+                    "site_numberic_id": 23770,
+                    "statement_guid": "Q2378306$7fc5376f-4344-5c59-ba88-8bcd5e57929c",
+                    "has_reference": false,
+                    "current_rank": "normal"
+                },
+                {
+                    "site_q": "Q41519",
+                    "site_label": "Compton Gamma Ray Observatory",
+                    "site_numberic_id": 41519,
+                    "statement_guid": "Q2378306$6d4c5005-4ba1-5b6d-5952-7edce2accc42",
+                    "has_reference": false,
+                    "current_rank": "normal"
+                },
+                {
+                    "site_q": "Q156081",
+                    "site_label": "Ulysses",
+                    "site_numberic_id": 156081,
+                    "statement_guid": "Q2378306$bd9f53a4-49f4-2504-7bfb-0130419d3f03",
+                    "has_reference": false,
+                    "current_rank": "normal"
+                }
+            ]
+        },
+        {
+            "item_q": "Q19283932",
+            "item_label": "289314 Chisholm",
+            "item_description": "asteroid",
+            "sites": [
+                {
+                    "site_q": "Q131230",
+                    "site_label": "Mauna Kea",
+                    "site_numberic_id": 131230,
+                    "statement_guid": "Q19283932$EF741E0E-0073-4642-A809-009EE5775C50",
+                    "has_reference": true,
+                    "current_rank": "normal"
+                },
+                {
+                    "site_q": "Q831790",
+                    "site_label": "Mauna Kea Observatories",
+                    "site_numberic_id": 831790,
+                    "statement_guid": "Q19283932$064f3f5e-1e63-4e28-868b-794e8d4d736d",
+                    "has_reference": true,
+                    "current_rank": "normal"
+                },
+                {
+                    "site_q": "Q191684",
+                    "site_label": "Palomar Observatory",
+                    "site_numberic_id": 191684,
+                    "statement_guid": "Q19283932$df20c527-2da8-46b1-9b4d-08dba11c580a",
+                    "has_reference": true,
+                    "current_rank": "normal"
+                }
+            ]
+        },
+        {
+            "item_q": "Q22712989",
+            "item_label": "325973 Cardinal",
+            "item_description": "asteroid",
+            "sites": [
+                {
+                    "site_q": "Q131230",
+                    "site_label": "Mauna Kea",
+                    "site_numberic_id": 131230,
+                    "statement_guid": "Q22712989$985F6A6F-2891-4512-918C-717A25DB4F9F",
+                    "has_reference": true,
+                    "current_rank": "normal"
+                },
+                {
+                    "site_q": "Q831790",
+                    "site_label": "Mauna Kea Observatories",
+                    "site_numberic_id": 831790,
+                    "statement_guid": "Q22712989$d701f730-788c-4266-bf9a-b01ec808de88",
+                    "has_reference": true,
+                    "current_rank": "normal"
+                },
+                {
+                    "site_q": "Q191684",
+                    "site_label": "Palomar Observatory",
+                    "site_numberic_id": 191684,
+                    "statement_guid": "Q22712989$023e5f24-4905-48bb-ab46-e934fea0daa2",
+                    "has_reference": true,
+                    "current_rank": "normal"
+                }
+            ]
+        },
+        {
+            "item_q": "Q38080891",
+            "item_label": "GW170817",
+            "item_description": "gravitational wave signal detected by the LIGO observatory on 17 August 2017",
+            "sites": [
+                {
+                    "site_q": "Q255371",
+                    "site_label": "Laser Interferometer Gravitational Wave Observatory",
+                    "site_numberic_id": 255371,
+                    "statement_guid": "Q38080891$4da19423-46a2-fdc0-60b8-8d12737df96f",
+                    "has_reference": false,
+                    "current_rank": "normal"
+                },
+                {
+                    "site_q": "Q50021",
+                    "site_label": "INTEGRAL",
+                    "site_numberic_id": 50021,
+                    "statement_guid": "Q38080891$44cfb9dc-4692-6af2-b21d-458d880b9163",
+                    "has_reference": false,
+                    "current_rank": "normal"
+                },
+                {
+                    "site_q": "Q726648",
+                    "site_label": "Fermi Gamma-ray Space Telescope",
+                    "site_numberic_id": 726648,
+                    "statement_guid": "Q38080891$5fed72c8-42ff-8934-467e-3054b12ec453",
+                    "has_reference": false,
+                    "current_rank": "normal"
+                },
+                {
+                    "site_q": "Q2063130",
+                    "site_label": "Virgo",
+                    "site_numberic_id": 2063130,
+                    "statement_guid": "Q38080891$bf3578ba-4f42-59dc-d8c4-1c6742931943",
+                    "has_reference": true,
+                    "current_rank": "normal"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fix the Discovery Site - local</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #006699;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #006699;
+            margin-top: 30px;
+        }
+
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .button-group {
+            margin: 20px 0;
+        }
+
+        button {
+            background: #006699;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background: #005580;
+        }
+
+        button.secondary {
+            background: #666;
+        }
+
+        button.secondary:hover {
+            background: #555;
+        }
+
+        .status {
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status.loading {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .tile-preview {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            background: #fafafa;
+        }
+
+        .tile-preview h4 {
+            margin-top: 0;
+            color: #006699;
+        }
+
+        .tile-section {
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 4px;
+        }
+
+        .tile-buttons {
+            margin-top: 15px;
+        }
+
+        .tile-buttons button {
+            margin: 5px;
+        }
+
+        .tile-buttons button.green {
+            background: #28a745;
+        }
+
+        .tile-buttons button.white {
+            background: #6c757d;
+        }
+
+        a {
+            color: #006699;
+        }
+
+        .links {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        .links a {
+            display: inline-block;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="section">
+        <h3>API Tests</h3>
+        <div class="button-group">
+            <button onclick="testDesc()">Test ?action=desc</button>
+            <button onclick="testTiles(1)">Test ?action=tiles&num=1</button>
+            <button onclick="testTiles(3)">Test ?action=tiles&num=3</button>
+            <button onclick="testLogAction()">Test ?action=log_action</button>
+        </div>
+        <div id="status" class="status loading" style="display: none;"></div>
+    </div>
+    <div class="section">
+        <h3>Response</h3>
+        <pre id="response"></pre>
+    </div>
+    <div class="section" id="preview-section" style="display: none;">
+        <h3>Tile preview</h3>
+        <div id="tile-preview">1 tile(s)</div>
+    </div>
+    <div class="links">
+        <h3>Quick Links</h3>
+        <a href="game.php?action=desc" target="_blank">Open desc response</a>
+        <a href="game.php?action=tiles&num=1" target="_blank">Open tiles response</a>
+        <a href="data/candidates.json" target="_blank">View candidates.json</a>
+    </div>
+    <script>
+        function showStatus(message, type) {
+            const el = document.getElementById('status');
+            el.textContent = message;
+            el.className = 'status ' + type;
+            el.style.display = 'block';
+        }
+        function formatJson(obj) {
+            return JSON.stringify(obj, null, 2);
+        }
+        async function callApi(url) {
+            showStatus('Loading...', 'loading');
+            document.getElementById('preview-section').style.display = 'none';
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                document.getElementById('response').textContent = formatJson(data);
+
+                if (data.error) {
+                    showStatus('Error: ' + data.error, 'error');
+                } else {
+                    showStatus('Success!', 'success');
+                }
+
+                return data;
+            } catch (err) {
+                showStatus('Fetch error: ' + err.message, 'error');
+                document.getElementById('response').textContent = 'Error: ' + err.message;
+                return null;
+            }
+        }
+        async function testDesc() {
+            const data = await callApi('game.php?action=desc');
+            if (data && data.label) {
+                showStatus('Game: ' + data.label.en, 'success');
+            }
+        }
+        async function testTiles(num) {
+            const data = await callApi('game.php?action=tiles&num=' + num);
+
+            if (data && data.tiles && data.tiles.length > 0) {
+                showStatus('Received ' + data.tiles.length + ' tile(s)', 'success');
+                renderTilePreview(data.tiles[0]);
+            }
+        }
+        async function testLogAction() {
+            const data = await callApi('game.php?action=log_action&id=Q12345&decision=keep_Q185037');
+            if (data && data.status === 'OK') {
+                showStatus('log_action works!', 'success');
+            }
+        }
+        function renderTilePreview(tile) {
+            const container = document.getElementById('tile-preview');
+            const section = document.getElementById('preview-section');
+
+            let html = '<div class="tile-preview">';
+            html += '<h4>Tile ID: ' + tile.id + '</h4>';
+            tile.sections.forEach(s => {
+                html += '<div class="tile-section">';
+                if (s.type === 'item') {
+                    html += '<strong>Item:</strong> ';
+                    html += '<a href="https://www.wikidata.org/wiki/' + s.q + '" target="_blank">' + s.q + '</a>';
+                } else if (s.type === 'text') {
+                    if (s.title) html += '<strong>' + s.title + '</strong><br>';
+                    html += s.text.replace(/\n/g, '<br>');
+                }
+                html += '</div>';
+            });
+            html += '<div class="tile-buttons">';
+            tile.controls.forEach(c => {
+                if (c.type === 'buttons') {
+                    c.entries.forEach(b => {
+                        const btnClass = b.type || 'green';
+                        const actions = b.api_action ? b.api_action.length : 0;
+                        html += '<button class="' + btnClass + '" ';
+                        html += 'onclick="previewButtonClick(\'' + b.decision + '\', ' + actions + ')">';
+                        html += b.label;
+                        html += '</button>';
+                    });
+                }
+            });
+            html += '</div>';
+
+            html += '</div>';
+
+            container.innerHTML = html;
+            section.style.display = 'block';
+        }
+        function previewButtonClick(decision, actionCount) {
+            if (decision === 'skip') {
+                alert('SKIP clicked\n\nNo Wikidata changes would be made.');
+            } else {
+                alert('Button clicked: ' + decision + '\n\n' +
+                    'This would execute ' + actionCount + ' API action(s) to deprecate other values.');
+            }
+        }
+    </script>
+</body>
+
+</html>
