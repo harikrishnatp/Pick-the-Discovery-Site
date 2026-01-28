@@ -174,46 +174,48 @@ function buildTile($candidate, $db_id){
     $buttons = [];
     
     foreach ($candidate['sites'] as $site) {
-        $to_deprecate = null;
+        $claims_to_deprecate = [];
+        
         foreach ($candidate['sites'] as $other) {
             if ($other['statement_guid'] !== $site['statement_guid']) {
-                $to_deprecate = $other;
-                break;
+                $claims_to_deprecate[] = [
+                    'id' => $other['statement_guid'],
+                    'type' => 'statement',
+                    'rank' => 'deprecated',
+                    'mainsnak' => [
+                        'snaktype' => 'value',
+                        'property' => 'P65',
+                        'datavalue' => [
+                            'type' => 'wikibase-entityid',
+                            'value' => [
+                                'entity-type' => 'item',
+                                'numeric-id' => intval($other['site_numberic_id'] ?? 
+                                    preg_replace('/\D/', '', $other['site_q']))
+                            ]
+                        ]
+                    ]
+                ];
             }
         }
         
-        if ($to_deprecate !== null) {
-            $claim = [
-                'id' => $to_deprecate['statement_guid'],
-                'type' => 'statement',
-                'rank' => 'deprecated',
-                'mainsnak' => [
-                    'snaktype' => 'value',
-                    'property' => 'P65',
-                    'datavalue' => [
-                        'type' => 'wikibase-entityid',
-                        'value' => [
-                            'entity-type' => 'item',
-                            'numeric-id' => intval($to_deprecate['site_numberic_id'] ?? 
-                                preg_replace('/\D/', '', $to_deprecate['site_q']))
-                        ]
-                    ]
-                ]
-            ];
-            
+        if (!empty($claims_to_deprecate)) {
             $label = $site['site_label'];
-            // if (!empty($site['has_reference'])) {
-            //     $label .= ' has reference';
-            // }
             
+            $data = ['claims' => []];
+            foreach ($claims_to_deprecate as $claim) {
+                $data['claims']['P65'][] = $claim;
+            }
+            
+            // wbsetclaim doesnt work when theres more than one to deprecate
             $buttons[] = [
                 'type' => 'green',
                 'decision' => 'keep_' . $site['site_q'],
                 'label' => $label,
                 'api_action' => [
-                    'action' => 'wbsetclaim',
-                    'claim' => json_encode($claim),
-                    'summary' => 'Deprecated duplicate discovery site via [[Wikidata:Wikidata Game|Wikidata Game]]'
+                    'action' => 'wbeditentity',
+                    'id' => $candidate['item_q'],
+                    'data' => json_encode($data),
+                    'summary' => 'Deprecated duplicate discovery sites via [[Wikidata:Wikidata Game|Wikidata Game]]'
                 ]
             ];
         }
