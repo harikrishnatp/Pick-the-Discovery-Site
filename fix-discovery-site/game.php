@@ -1,52 +1,85 @@
 <?php
 
+require_once('./config.php');
+
+error_reporting(E_ERROR | E_PARSE);
+ini_set('display_errors', 'Off');
+
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
-define('CANDIDATES_FILE', __DIR__ . '/data/candidates.json');
+// define('CANDIDATES_FILE', __DIR__ . '/data/candidates.json');
 
-$callback = isset($_REQUEST['callback']) ? $_REQUEST['callback'] : '';
-$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
-$num = isset($_REQUEST['num']) ? intval($_REQUEST['num']) : 1;
-$out = array();
+$callback = get_request('callback', '');
+$action = get_request('action', '');
+$num = max(1, min(10, intval(get_request('num',1))));
+$lang = get_request('lang', 'en');
+
+$out = [];
 
 if($action == 'desc'){
-    $out = array(
-        'label' => array(
+    $out = [
+        'label' => [
             'en' => 'Pick the Discovery site'
-        ),
-        'description' => array('Astronomical objects should have only ONE discovery site. Help choose the correct one!',
-        ),
-        'icon' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/25_Images_to_Celebrate_NASA%E2%80%99s_Chandra_25th_Anniversary-_Crab_Nebula_%2853893798390%29.jpg/960px-25_Images_to_Celebrate_NASA%E2%80%99s_Chandra_25th_Anniversary-_Crab_Nebula_%2853893798390%29.jpg?20240810135150',
-        'instructions' => 'Each item shows an astronomical object with multiple discovery sites listed. This violates the single-value constraint for P65. Review the options and click the button for the correct discovery site. Observatories carry more weightage. Click "Skip" if you are unsure.'
-    );
+        ],
+        'description' => ['Astronomical objects should have only ONE discovery site. Help choose the correct one!',
+        ],
+        'icon' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Nuvola_apps_kstars.png/120px-Nuvola_apps_kstars.png',
+        'instructions' => [
+            'en' => "Each item shows an astronomical object with multiple discovery sites listed. This violates the single-value constraint for P65. Review the options and click the button for the correct discovery site. Observatories carry more weightage. Click 'Skip' if you are unsure."
+        ],
+    ];
 }
 else if ($action == 'tiles'){
-    if(!file_exists(CANDIDATES_FILE)) {
-        $out['error'] = 'Candidates file not found';
-        $out['tiles'] = array();
-    }else{
-        $json = file_get_contents(CANDIDATES_FILE);
-        $data = json_decode($json, true);
+    $db = connectDB('discovery_site_violations');
 
-        if($data === null){
-            $out['error'] = 'Invalid JSON in candidates file';
-            $out['tiles'] = array();
-        }else{
-            $candidates = $data['candidates'];
-            shuffle($candidates);
-            $selected = array_slice($candidates, 0, min($num, count($candidates)));
+    $out['tiles'] = [];
+    $selected_ids = [];
 
-            $out['tiles'] = array();
-            foreach($selected as $candidate){
-                $out['tiles'][] = buildTile($candidate);
+    $attempts = 0;
+    while(count($out['tiles']) < $num && $attempts < 3){
+        $attempts++;
+
+        $r = mt_rand() / mt_getrandmax();
+        $sql = "SELECT * FROM candidates  WHERE status IS NULL AND random >= $r";
+
+        if(!empty($selected_ids)){
+            $sql .= "AND id NOT IN (" . implode(',',$selected_ids) . ")";
+        }
+
+        $sql .= " ORDER BY random LIMIT " . ($num * 2);
+
+        $result = $db->query($sql);
+
+        if(!result){
+            $out['error'] = 'Database error: ' . $db->error;
+            break;
+        }
+        while($row = $result->fetch_object()){
+            $selected_ids[] = $row->id;
+
+            $candidate = json_decode($row->data, true);
+            if($candidate){
+                $tile = buildTile($candidate, $row->id);
+                if($tile !== null){
+                    $out['tiles'][] = $tile;
+                }
             }
+            if(count($out['tiles']) >= $num) break;
+        }
+        if($result->num_rows == 0) break;
+    }
+    $count_result = $db->query("SELECT COUNT(*) as cnt FROM candidates WHERE status IS NULL");
+    if($count_result && $row = $count_result->fetch_object()){
+        $out['remaining'] = intval($row->cnt);
+        if ($out['remaining']<10){
+            $out['low'] = 1;
         }
     }
 }
 
 else if ($action == 'log_action'){
-    $out['status'] = 'OK';
-    $out['message'] = 'Action logged';
+    // $out['status'] = 'OK';
+    // $out['message'] = 'Action logged';
     // need to write the rest, checking for now
 }
 
