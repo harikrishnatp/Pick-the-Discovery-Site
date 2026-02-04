@@ -41,7 +41,7 @@ All games are independent of each other and have their own HTTP API. They can be
 2. Chooses a game and the game content is fetched from the game API
 3. Player gets the content and clicks a button
 4. Framework sends the API action to wikidata using the OAuth credentials
-5. Game updatees its database to mark the item as processed.
+5. Game updates its database to mark the item as processed.
 
 ## Actions by api.php
 
@@ -67,7 +67,7 @@ Response:
 
 - Here, we are making use of JSONP as we have cooperating servers (my tool and the distributed game tool) so using it, we can bypass the same origin policy.
 - The response is wrapped in the callback function name.
-- The `label` and `description` must be objects with language keys or game gets status as BAD_JSON and won't appear in the list. Initially when I was building the game, I didn't use and got that status while testing.
+- The `label` and `description` must be objects with language keys or game gets status as BAD_JSON and won't appear in the list. Initially when I was building the game, I didn't use it and got that response while testing.
 
 ### `action=tiles`
 
@@ -161,7 +161,7 @@ Request: `GET https://unique-discovery-site.toolforge.org/api.php?action=log_act
 ]
 ```
 
-- The candidate is marked and done in db and the scores are added in the scores db.
+- The candidate is marked as done in the database and the scores are added in the scores database.
 
 ## Building "Fix the Discovery Site"
 
@@ -179,10 +179,13 @@ This is the site that helped me the most as it contains all the resources to fin
 4. Data collection: Use SPARQL query to fetch the get the details
 
 ```sparql
-SELECT ?item ?itemLabel (COUNT(?site) AS ?siteCount) WHERE {
+SELECT ?item ?itemLabel (COUNT(?site) AS ?siteCount) 
+
+WHERE {
   ?item wdt:P65 ?site .
   SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
 }
+
 GROUP BY ?item ?itemLabel
 HAVING (COUNT(?site) > 1)
 ORDER BY DESC(?siteCount)
@@ -198,5 +201,5 @@ In the production, I have a database with tables which includes `candidates`, `u
 ### Problems I faced
 
 1. Took a while to figure out how to deprecate a statement using GUID
-2. At first I was passing the claims as nested array and was getting cryptic error and then I came it know it must be a JSON string and that I should Use json_encode while passing it. 
-3. Initially I used `wbsetclaim` to deprecate the statements but when there are more than 2 discovery sites, It wouldn't work. Then I used `wbeditentity` as it can update multiple statements at once.
+2. At first I was passing the claims as nested array and was getting cryptic error and then I came to know that it must be a JSON string and that I should use json_encode while passing it. 
+3. Initially I used `wbsetclaim` to deprecate the statements but when there are more than 2 discovery sites, it wouldn't work. Then I used `wbeditentity` as it can update multiple statements at once.
